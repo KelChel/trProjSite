@@ -18,6 +18,7 @@ months = pd.date_range('2022-01-03', '2022-09-01', freq='1M', normalize=True)
 months_to_analyse = [d.strftime('%Y-%m') for d in months]
 vk2022 = VKdf.loc[VKdf['only_date'].isin(months_to_analyse)]
 plt.figure(figsize = (20,15))
+sns.heatmap(vk2022, cmap="coolwarm", annot = True)
 st.pyplot()
 
 
