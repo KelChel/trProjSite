@@ -11,6 +11,9 @@ st.title("Рекомендации")
 st.write("реки")
 
 VKdf = pd.read_excel('posts.xlsx', sheet_name='РГООИ_Надежда_')
+plt.figure(figsize = (20,15))
+sns.heatmap(VKdf, cmap="coolwarm", annot = True)
+st.pyplot()
 
 
 st.header("Разработчики")
