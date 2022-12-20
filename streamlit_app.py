@@ -17,6 +17,8 @@ VKdf['weekday'] = VKdf['date'].dt.dayofweek
 months = pd.date_range('2022-01-03', '2022-09-01', freq='1M', normalize=True)
 months_to_analyse = [d.strftime('%Y-%m') for d in months]
 vk2022 = VKdf.loc[VKdf['only_date'].isin(months_to_analyse)]
+plt.figure(figsize = (20,15))
+st.pyplot()
 
 
 st.header("Разработчики")
