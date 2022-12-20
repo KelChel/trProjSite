@@ -11,9 +11,12 @@ st.title("Рекомендации")
 st.write("реки")
 
 VKdf = pd.read_excel('posts.xlsx', sheet_name='РГООИ_Надежда_')
-plt.figure(figsize = (20,15))
-sns.heatmap(VKdf, cmap="coolwarm", annot = True)
-st.pyplot()
+VKdf['only_date'] = VKdf['date'].dt.strftime('%Y-%m')
+VKdf['only_time'] = VKdf['date'].dt.strftime('%H')
+VKdf['weekday'] = VKdf['date'].dt.dayofweek
+months = pd.date_range('2022-01-03', '2022-09-01', freq='1M', normalize=True)
+months_to_analyse = [d.strftime('%Y-%m') for d in months]
+vk2022 = VKdf.loc[VKdf['only_date'].isin(months_to_analyse)]
 
 
 st.header("Разработчики")
