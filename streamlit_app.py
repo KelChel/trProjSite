@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 st.title("Рекомендации")
 st.write("реки")
 
-st.image()
+# st.image()
 
 
 st.header("Разработчики")
