@@ -17,7 +17,7 @@ VKdf['weekday'] = VKdf['date'].dt.dayofweek
 months = pd.date_range('2022-01-03', '2022-09-01', freq='1M', normalize=True)
 months_to_analyse = [d.strftime('%Y-%m') for d in months]
 vk2022 = VKdf.loc[VKdf['only_date'].isin(months_to_analyse)]
-st.dataframe(vk2022.describe())
+st.dataframe(VKdf.describe())
 
 st.header("Разработчики")
 st.write("""[Колеух Максим](https://vk.com/kelchel) - \n
