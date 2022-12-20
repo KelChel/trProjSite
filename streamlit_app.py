@@ -19,12 +19,6 @@ months_to_analyse = [d.strftime('%Y-%m') for d in months]
 vk2022 = VKdf.loc[VKdf['only_date'].isin(months_to_analyse)]
 st.dataframe(VKdf.describe())
 
-df2 = VKdf
-df2 = df2.set_index('DateMonth')
-df2 = df2.corr()
-plt.figure(figsize = (20,15))
-sns.heatmap(df2, cmap="coolwarm", annot = True)
-st.pyplot()
 
 st.header("Разработчики")
 st.write("""[Колеух Максим](https://vk.com/kelchel) - \n
