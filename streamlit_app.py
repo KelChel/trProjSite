@@ -3,7 +3,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-st.set_option('deprecation.showPyplotGlobalUse', False)
+# st.set_option('deprecation.showPyplotGlobalUse', False)
 
 st.title("Рекомендации")
 st.write("реки")
