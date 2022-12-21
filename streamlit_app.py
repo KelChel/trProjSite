@@ -8,7 +8,7 @@ import re
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-st.title("Рекомендации")
+st.title("Рекомендации [группе VK](https://vk.com/rgooinadezhda)")
 
 VKdf = pd.read_excel('posts.xlsx', sheet_name='РГООИ_Надежда_')
 VKdf['only_date'] = VKdf['date'].dt.strftime('%Y-%m')
