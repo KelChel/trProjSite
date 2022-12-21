@@ -139,6 +139,20 @@ plt.xticks(rotation=45)
 plt.legend()
 st.pyplot()
 
+attachments1 = weekend_df.groupby('media 1').agg({'likes' : 'median', 'reposts' : 'median', 'media count' : 'median', 'count' : 'sum'}).reset_index()
+attachments1.sort_values('likes')
+
+topics_sorted = vkexp_df['topics'].value_counts()[vkexp_df['topics'].value_counts(normalize=True) > 0.01]
+
+vkexp_df['topics'] = vkexp_df['topics'].str.lower()
+topics_sorted1 = vkexp_df['topics'].value_counts()[vkexp_df['topics'].value_counts(normalize=True) > 0.01]
+topics_sorted1
+st.pyplot
+
+
+top_topics = list(topics_sorted1.index)
+vk_pop_topics = vkexp_df.loc[vkexp_df['topics'].isin(top_topics)]
+
 
 st.header("Разработчики")
 st.write("""[Колеух Максим](https://vk.com/kelchel) - сайт\n
