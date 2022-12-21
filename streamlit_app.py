@@ -58,11 +58,40 @@ vkdf['text_length'] = vkdf.apply(lambda row : text_group_by_count(row['text_leng
 
 st.dataframe(vkdf.describe())
 
+workday_df_not_rush = vkdf.loc[(vkdf['weekday'].isin(list(range(0, 5)))) & (vkdf['only_time'].isin(['09','10','16','17','18','19','20',]))]
+workday_df_not_rush['only_time'].unique()
+
+
+median_activity = workday_df_not_rush.groupby('only_time').agg('median').reset_index()
+length_count_time = workday_df_not_rush.groupby('only_time')['count'].sum().reset_index()
+fig, ax = plt.subplots(figsize = (8, 4))
+for activity in ['comments', 'likes', 'reposts']: 
+    plt.plot(median_activity['only_time'], median_activity[activity], label = activity)
+plt.plot(length_count_time['only_time'], length_count_time['count'], label = 'count')
+plt.xticks(list(median_activity['only_time'].unique()))
+plt.title('Средние значения активностей посетилей паблика по времени публикации в будни не в часы пик')
+plt.xlabel('Время публикации, час')
+plt.ylabel('Количество единиц активности')
+plt.xticks(rotation=45)
+st.bokeh_chart(plt.legend())
+
+
+length_count = workday_df_not_rush.groupby('text_length')['count'].sum().reset_index()
+length_grouped = workday_df_not_rush.groupby('text_length').agg('median').reset_index()
+fig, ax = plt.subplots(figsize = (8, 4))
+for activity in ['comments', 'likes', 'reposts']: 
+    plt.plot(length_grouped['text_length'], length_grouped[activity], label = activity)
+plt.plot(length_count['text_length'], length_count['count'], label = 'count')
+plt.title('Средние значения активностей посетилей паблика по длине текста')
+plt.xlabel('Длина текста')
+plt.ylabel('Количество активностей')
+plt.xticks(rotation=45)
+plt.legend()
 
 
 st.header("Разработчики")
-st.write("""[Колеух Максим](https://vk.com/kelchel) - \n
-[Иван Гречкин](https://vk.com/yokore) - \n
+st.write("""[Колеух Максим](https://vk.com/kelchel) - сайт\n
+[Иван Гречкин](https://vk.com/yokore) - анализ и рекомендации\n
 [Егор Мацко](https://vk.com/kitsunnet) - \n
 [Вадим Игнатов](https://vk.com/qbubble) - \n
 [Николай Сергиенко](https://vk.com/waflyaaa) -
