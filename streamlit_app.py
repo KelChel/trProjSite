@@ -145,17 +145,19 @@ attachments1.sort_values('likes')
 topics_sorted = vkexp_df['topics'].value_counts()[vkexp_df['topics'].value_counts(normalize=True) > 0.01]
 
 vkexp_df['topics'] = vkexp_df['topics'].str.lower()
-topics_sorted1 = vkexp_df['topics'].value_counts()[vkexp_df['topics'].value_counts(normalize=True) > 0.01]
+topics_sorted1 = vkexp_df['topics'].value_counts()[vkexp_df['topics'].value_counts(normalize=True) > 0.01]  
 
 
 top_topics = list(topics_sorted1.index)
 vk_pop_topics = vkexp_df.loc[vkexp_df['topics'].isin(top_topics)]
 
+vk_pop_topics.groupby('topics').agg({'likes' : 'median', 'reposts' : 'median', 'media count' : 'median', 'count' : 'sum'}).reset_index().sort_values(by='likes', ascending=False)
+st.pyplot()
 
 st.header("Разработчики")
-st.write("""[Колеух Максим](https://vk.com/kelchel) - сайт\n
-[Иван Гречкин](https://vk.com/yokore) - анализ и рекомендации\n
-[Егор Мацко](https://vk.com/kitsunnet) - \n
-[Вадим Игнатов](https://vk.com/qbubble) - \n
-[Николай Сергиенко](https://vk.com/waflyaaa) -
+st.write("""[Колеух Максим](https://vk.com/kelchel) - студент провёл работу по сбору датасета и реализации сайта с помощью языка Python\n
+[Иван Гречкин](https://vk.com/yokore) - студент дал рекомендации на основе проанализированных данных, а также провёл обработку датасета\n
+[Егор Мацко](https://vk.com/kitsunnet) - студент провёл анализ данных и работу по сбору и подготовке датасета к обработке данных.\n
+[Вадим Игнатов](https://vk.com/qbubble) - студент провёл анализ данных, так же помогал при подготовке датасета к обработке данных\n
+[Николай Сергиенко](https://vk.com/waflyaaa) - студент проделал работу по сбору датасета, а также оказал помощь в реализации сайта на Python и написании отчёта
 """)
