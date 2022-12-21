@@ -89,6 +89,57 @@ plt.xticks(rotation=45)
 plt.legend()
 st.pyplot()
 
+attachments = workday_df_not_rush.groupby('media 1').agg({'likes' : 'median', 'reposts' : 'median', 'media count' : 'median', 'count' : 'sum'}).reset_index()
+attachments.sort_values('likes')
+
+workday_rush = vkdf.loc[(vkdf['weekday'].isin(list(range(0, 5)))) & (vkdf['only_time'].isin(['11','12','13','14','15']))]
+median_activity = workday_rush.groupby('only_time').agg('median').reset_index()
+length_count_time = workday_rush.groupby('only_time')['count'].sum().reset_index()
+fig, ax = plt.subplots(figsize = (8, 4))
+for activity in ['comments', 'likes', 'reposts']: 
+    plt.plot(median_activity['only_time'], median_activity[activity], label = activity)
+plt.plot(length_count_time['only_time'], length_count_time['count'], label = 'count')
+plt.xticks(list(median_activity['only_time'].unique()))
+plt.title('Средние значения активностей посетилей паблика по времени публикации в часы-пик')
+plt.xlabel('Время публикации, час')
+plt.ylabel('Количество единиц активности')
+plt.xticks(rotation=45)
+plt.legend()
+st.pyplot()
+
+attachments = workday_rush.groupby('media 1').agg({'likes' : 'median', 'reposts' : 'median', 'media count' : 'median', 'count' : 'sum'}).reset_index()
+attachments.sort_values('likes')
+
+weekend_df = vkdf.loc[(vkdf['weekday'].isin(list(range(5, 7))))]
+weekend_df
+
+median_activity = weekend_df.groupby('only_time').agg('median').reset_index()
+length_count_time = weekend_df.groupby('only_time')['count'].sum().reset_index()
+fig, ax = plt.subplots(figsize = (8, 4))
+for activity in ['comments', 'likes', 'reposts']: 
+    plt.plot(median_activity['only_time'], median_activity[activity], label = activity)
+plt.plot(length_count_time['only_time'], length_count_time['count'], label = 'count')
+plt.xticks(list(median_activity['only_time'].unique()))
+plt.title('Средние значения активностей посетилей паблика по времени публикации в выходные')
+plt.xlabel('Время публикации, час')
+plt.ylabel('Количество единиц активности')
+plt.xticks(rotation=45)
+plt.legend()
+st.pyplot()
+
+length_count = weekend_df.groupby('text_length')['count'].sum().reset_index()
+length_grouped = weekend_df.groupby('text_length').agg('median').reset_index()
+fig, ax = plt.subplots(figsize = (8, 4))
+for activity in ['comments', 'likes', 'reposts']: 
+    plt.plot(length_grouped['text_length'], length_grouped[activity], label = activity)
+plt.plot(length_count['text_length'], length_count['count'], label = 'count')
+plt.title('Средние значения активностей посетилей паблика по длине текста в выходные')
+plt.xlabel('Длина текста')
+plt.ylabel('Количество активностей')
+plt.xticks(rotation=45)
+plt.legend()
+st.pyplot()
+
 
 st.header("Разработчики")
 st.write("""[Колеух Максим](https://vk.com/kelchel) - сайт\n
