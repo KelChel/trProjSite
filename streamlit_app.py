@@ -152,7 +152,11 @@ top_topics = list(topics_sorted1.index)
 vk_pop_topics = vkexp_df.loc[vkexp_df['topics'].isin(top_topics)]
 
 vk_pop_topics.groupby('topics').agg({'likes' : 'median', 'reposts' : 'median', 'media count' : 'median', 'count' : 'sum'}).reset_index().sort_values(by='likes', ascending=False)
-st.pyplot()
+
+vk_pop_topics_weekday = vk_pop_topics.loc[(vk_pop_topics['weekday'].isin(list(range(0, 5))))]
+vk_pop_topics_weekday.groupby('topics').agg({'likes' : 'median', 'reposts' : 'median', 'media count' : 'median', 'count' : 'sum'}).reset_index().sort_values(by='likes', ascending=False)
+st.pyploty()
+
 
 st.header("Разработчики")
 st.write("""[Колеух Максим](https://vk.com/kelchel) - студент провёл работу по сбору датасета и реализации сайта с помощью языка Python\n
