@@ -87,6 +87,7 @@ plt.xlabel('Длина текста')
 plt.ylabel('Количество активностей')
 plt.xticks(rotation=45)
 plt.legend()
+st.pyplot()
 
 
 st.header("Разработчики")
