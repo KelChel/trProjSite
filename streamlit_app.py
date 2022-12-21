@@ -73,7 +73,7 @@ plt.title('Средние значения активностей посетил
 plt.xlabel('Время публикации, час')
 plt.ylabel('Количество единиц активности')
 plt.xticks(rotation=45)
-st.bokeh_chart(plt.legend())
+plt.legend()
 
 
 length_count = workday_df_not_rush.groupby('text_length')['count'].sum().reset_index()
