@@ -155,7 +155,7 @@ vk_pop_topics.groupby('topics').agg({'likes' : 'median', 'reposts' : 'median', '
 
 vk_pop_topics_weekday = vk_pop_topics.loc[(vk_pop_topics['weekday'].isin(list(range(0, 5))))]
 vk_pop_topics_weekday.groupby('topics').agg({'likes' : 'median', 'reposts' : 'median', 'media count' : 'median', 'count' : 'sum'}).reset_index().sort_values(by='likes', ascending=False)
-st.pyploty()
+st.pyplot()
 
 
 st.header("Разработчики")
