@@ -146,8 +146,6 @@ topics_sorted = vkexp_df['topics'].value_counts()[vkexp_df['topics'].value_count
 
 vkexp_df['topics'] = vkexp_df['topics'].str.lower()
 topics_sorted1 = vkexp_df['topics'].value_counts()[vkexp_df['topics'].value_counts(normalize=True) > 0.01]
-topics_sorted1
-st.pyplot
 
 
 top_topics = list(topics_sorted1.index)
