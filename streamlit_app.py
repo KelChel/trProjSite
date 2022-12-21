@@ -9,7 +9,6 @@ import re
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 st.title("Рекомендации")
-st.write("в выходные активность пользователей (вовлеченность) гораздо выше, чем в будни. /n может быть есть какая-то еще закономерность? может, рубрики особые? или еще что? анализируем два датафрейма (будни и выходные) чтобы узнать. /n надо поделать facet grids или построить разные графики, чтобы посмотреть, какие есть закономерности между несколькими значениями")
 
 VKdf = pd.read_excel('posts.xlsx', sheet_name='РГООИ_Надежда_')
 VKdf['only_date'] = VKdf['date'].dt.strftime('%Y-%m')
@@ -57,6 +56,8 @@ def text_group_by_count(textt):
 vkdf['text_length'] = vkdf.apply(lambda row : text_group_by_count(row['text_length']), axis=1)
 
 st.dataframe(vkdf.describe())
+
+st.write('Не в час пик количество постов самое высоке с 11 до 19 и активность тоже примерно одинаковая, исключая количество лайков в утреннее время. А вот репостов немного больше после 17. Может быть, если нужно больше лайков, стоит тоже побольше публиковать в 11? А для репостов - в 17')
 
 workday_df_not_rush = vkdf.loc[(vkdf['weekday'].isin(list(range(0, 5)))) & (vkdf['only_time'].isin(['09','10','16','17','18','19','20',]))]
 workday_df_not_rush['only_time'].unique()
