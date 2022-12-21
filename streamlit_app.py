@@ -54,8 +54,9 @@ def text_group_by_count(textt):
         return 300 
     
 vkdf['text_length'] = vkdf.apply(lambda row : text_group_by_count(row['text_length']), axis=1)
+time_grouped = vkdf.groupby('only_time').agg('sum').reset_index()
 
-st.dataframe(vkdf.describe())
+st.dataframe(time_grouped)
 
 st.write('Не в час пик количество постов самое высоке с 11 до 19 и активность тоже примерно одинаковая, исключая количество лайков в утреннее время. А вот репостов немного больше после 17. Может быть, если нужно больше лайков, стоит тоже побольше публиковать в 11? А для репостов - в 17')
 
