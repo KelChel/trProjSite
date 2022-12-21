@@ -111,7 +111,6 @@ attachments = workday_rush.groupby('media 1').agg({'likes' : 'median', 'reposts'
 attachments.sort_values('likes')
 
 weekend_df = vkdf.loc[(vkdf['weekday'].isin(list(range(5, 7))))]
-weekend_df
 
 median_activity = weekend_df.groupby('only_time').agg('median').reset_index()
 length_count_time = weekend_df.groupby('only_time')['count'].sum().reset_index()
